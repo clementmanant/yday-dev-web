@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block navbar %}
+    <nav class="navbar">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{{ path('homepage') }}"><img src="{{ asset('assets/img/logo-kine.png') }}" alt="" height="72" width="72"></a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right main-nav">
+                    <li><a href="{{ path('homepage') }}" class="btn btn-blue">Accueil</a></li>
+                    <li><a href="{{ path('app_register') }}" class="btn btn-blue">S'inscrire</a></li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+{% endblock %}
+
+{% block header %}
+    <header id="intro">
+        <div class="table">
+            <div class="header-text" style="text-align: start">
+                <form method="post">
+                    {% if error %}
+                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
+
+                    <div class="section blue-bg">
+                        <div style="width: 50%" class="center-block">
+                            <h2 class="white text-center">Please sign in</h2>
+                            <label style="margin: 30px 3px 3px 2.5%; font-size: large" for="inputEmail">Email</label>
+                            <input style="padding: 20px; width: 95%; margin-left: 2.5%" type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+                            <label style="margin: 30px 3px 3px 2.5%; font-size: large" for="inputPassword">Password</label>
+                            <input style="padding: 20px; width: 95%; margin-left: 2.5%" type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+
+                            <input type="hidden" name="_csrf_token"
+                                   value="{{ csrf_token('authenticate') }}"
+                            >
+
+                            {#
+                            Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+                            See https://symfony.com/doc/current/security/remember_me.html
+
+                            <div class="checkbox mb-3">
+                                <label>
+                                    <input type="checkbox" name="_remember_me"> Remember me
+                                </label>
+                            </div>
+                            #}
+
+
+                            <div style="margin: 30px" class="text-center">
+                                <button class="btn btn-white-fill btn-lg" type="submit">
+                                    Sign in
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </header>
+{% endblock %}
+
+{% block body %}
+
+{% endblock %}

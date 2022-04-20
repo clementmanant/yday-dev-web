@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block navbar %}
+    <nav class="navbar">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{{ path('homepage') }}"><img src="{{ asset('assets/img/logo-kine.png') }}" alt="" height="72" width="72"></a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right main-nav">
+                    {% if app.user() %}
+                        {% if "ROLE_ADMIN" in app.user.roles %}
+                            <li><a href="{{ path('app_logout') }}" class="btn btn-blue">Se déconnecter</a></li>
+                            <li><a href="{{ path('patients') }}" class="btn btn-blue">Patients</a></li>
+                        {% else %}
+                            <li><a href="{{ path('app_logout') }}" class="btn btn-blue">Se déconnecter</a></li>
+                            <li><a href="{{ path('app_profil', {'id': app.user.id}) }}" class="btn btn-blue">Profil</a></li>
+                        {% endif %}
+                    {% else %}
+                        <li><a href="{{ path('login') }}" class="btn btn-blue">Se connecter</a></li>
+                        <li><a href="{{ path('app_register') }}" class="btn btn-blue">S'inscrire</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+{% endblock %}
+
+{% block body %}
+    <div class="row" style="margin: 10px; justify-content: center">
+        {% for user in users %}
+            <div class="col-md-4" style="border: 2px solid black">
+                <h5 class="heading hide-hover">{{ user.email }}</h5>
+                <div class="bottom">
+                    <h4 class="heading small-heading no-margin regular">{{ user.lastname|upper }} {{ user.firstname }}</h4>
+                    <h4 style="margin-bottom: 10px" class="heading small-pt">{{ user.kine }}</h4>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div>
+        <ul>
+            {% if page != 1 %}
+                <li class="btn btn-blue-fill">
+                    <a href="{{ path('patients', {page: page - 1, nbre: nbre}) }}">
+                        Previous
+                    </a>
+                </li>
+            {% endif %}
+            {% for i in range(1, nbPages) %}
+                <li class="btn btn-blue-fill">
+                    <a href="{{ path('patients', {page: i, nbre: nbre}) }}">
+                        {{ i }}
+                    </a>
+                </li>
+            {% endfor %}
+            {% if page != nbPages %}
+            <li class="btn btn-blue-fill">
+                <a href="{{ path('patients', {page: page + 1, nbre: nbre}) }}">
+                    Next
+                </a>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+{% endblock %}
+
+{% block title %}Liste des patients{% endblock %}
+

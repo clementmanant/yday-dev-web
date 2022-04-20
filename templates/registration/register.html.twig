@@ -1,0 +1,126 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block navbar %}
+    <nav class="navbar">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{{ path('homepage') }}"><img src="{{ asset('assets/img/logo-kine.png') }}" alt="" height="72" width="72"></a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right main-nav">
+                    <li><a href="{{ path('homepage') }}" class="btn btn-blue">Accueil</a></li>
+                    <li><a href="{{ path('login') }}" class="btn btn-blue">Se connecter</a></li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+{% endblock %}
+
+{% block header %}
+    <header id="intro">
+        <div class="table">
+            <div class="header-text" style="text-align: start">
+                <form method="post">
+                    {% for flash_error in app.flashes('verify_email_error') %}
+                        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+                    {% endfor %}
+
+                    <div class="section blue-bg center-block">
+                        <div style="width: 50%" class="center-block">
+                            <h2 class="white text-center">Inscription</h2>
+                            <div style="margin: 30px 3px 3px 2.5%; font-size: large">
+                                {{ form_start(registrationForm) }}
+                                <div style="margin-top: 20px">
+                                    {{ form_label(registrationForm.firstname, 'Prénom')}}
+                                </div>
+                                <div>
+                                    {{ form_errors(registrationForm.firstname) }}
+                                </div>
+                                <div style="color: black">
+                                    {{ form_widget(registrationForm.firstname, {'attr': {'style': 'width: 100%'}}) }}
+                                </div>
+                                <div>
+                                    {{ form_help(registrationForm.firstname) }}
+                                </div>
+                                <div style="margin-top: 20px">
+                                    {{ form_label(registrationForm.lastname, 'Nom') }}
+                                </div>
+                                <div>
+                                    {{ form_errors(registrationForm.lastname) }}
+                                </div>
+                                <div style="color: black">
+                                    {{ form_widget(registrationForm.lastname, {'attr': {'style': 'width: 100%'}}) }}
+                                </div>
+                                <div>
+                                    {{ form_help(registrationForm.lastname) }}
+                                </div>
+                                <div style="margin-top: 20px">
+                                    {{ form_label(registrationForm.birthDate, 'Date de naissance') }}
+                                </div>
+                                <div>
+                                    {{ form_errors(registrationForm.birthDate) }}
+                                </div>
+                                <div style="color: black">
+                                    {{ form_widget(registrationForm.birthDate, {'attr': {'style': 'width: 100%'}}) }}
+                                </div>
+                                <div>
+                                    {{ form_help(registrationForm.birthDate) }}
+                                </div>
+                                <div style="margin-top: 20px">
+                                    {{ form_label(registrationForm.email) }}
+                                </div>
+                                <div>
+                                    {{ form_errors(registrationForm.email) }}
+                                </div>
+                                <div style="color: black">
+                                    {{ form_widget(registrationForm.email, {'attr': {'style': 'width: 100%'}}) }}
+                                </div>
+                                <div>
+                                    {{ form_help(registrationForm.email) }}
+                                </div>
+                                <div style="margin-top: 20px">
+                                    {{ form_label(registrationForm.plainPassword, 'Mot de passe') }}
+                                </div>
+                                <div>
+                                    {{ form_errors(registrationForm.plainPassword) }}
+                                </div>
+                                <div style="color: black">
+                                    {{ form_widget(registrationForm.plainPassword, {'attr': {'style': 'width: 100%'}}) }}
+                                </div>
+                                <div>
+                                    {{ form_help(registrationForm.plainPassword) }}
+                                </div>
+                                <div style="margin-top: 20px">
+                                    {{ form_label(registrationForm.agreeTerms, 'Accepter les termes') }}
+                                    {{ form_errors(registrationForm.agreeTerms) }}
+                                    {{ form_widget(registrationForm.agreeTerms) }}
+                                    {{ form_help(registrationForm.agreeTerms) }}
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-white-fill btn-lg">S'inscrire</button>
+                            </div>
+                            {{ form_end(registrationForm) }}
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </header>
+{% endblock %}
+
+{% block body %}
+
+{% endblock %}
